@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 node_modules
 *.env
 # Byte-compiled / optimized / DLL files
@@ -132,4 +129,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
->>>>>>> e995b62e4ffd51e84a6dc9873f93328a5dc72038
