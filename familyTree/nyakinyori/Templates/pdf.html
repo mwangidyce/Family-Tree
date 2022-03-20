@@ -1,0 +1,330 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <style type='text/css'>
+        /*Now the CSS*/
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .familyTree {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%238adfe0' fill-opacity='0.15'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .beige {
+            background-color: #ffdc01;
+            font-size: 20px;
+        }
+
+        .yellow {
+            background-color: #ffcccb;
+        }
+
+        .indigo {
+            background-color: #79d2f6;
+        }
+
+        .purple {
+            background-color: #d4e062;
+        }
+
+        .violet {
+            background-color: #c59bc7;
+        }
+
+        .grey {
+            background-color: rgb(248, 0, 0, 0.3);
+        }
+
+        .form-control {
+            text-transform: capitalize;
+        }
+
+        b {
+            font-weight: 700 !important;
+        }
+
+        .tree {
+            width: max-content !important;
+        }
+
+        .tree ul {
+            padding-top: 20px;
+            position: relative;
+
+            transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+        }
+
+        .tree li {
+            float: left;
+            text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding: 30px 5px 0 5px;
+
+            transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+        }
+
+        /*We will use ::before and ::after to draw the connectors*/
+
+        .tree li::before,
+        .tree li::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 50%;
+            border-top: 3px solid green;
+            width: 50%;
+            height: 30px;
+        }
+
+        .tree li::after {
+            right: auto;
+            left: 50%;
+            border-left: 3px solid green;
+        }
+
+        /*We need to remove left-right connectors from elements without 
+        any siblings*/
+        .tree li:only-child::after,
+        .tree li:only-child::before {
+            display: none;
+        }
+
+        /*Remove space from the top of single children*/
+        .tree li:only-child {
+            padding-top: 0;
+            float: none;
+        }
+
+        /*Remove left connector from first child and 
+        right connector from last child*/
+        .tree li:first-child::before,
+        .tree li:last-child::after {
+            border: 0 none;
+        }
+
+        /*Adding back the vertical connector to the last nodes*/
+        .tree li:last-child::before {
+            border-right: 3px solid green;
+            border-radius: 0 5px 0 0;
+            -webkit-border-radius: 0 5px 0 0;
+            -moz-border-radius: 0 5px 0 0;
+        }
+
+        .tree li:first-child::after {
+            border-radius: 5px 0 0 0;
+            -webkit-border-radius: 5px 0 0 0;
+            -moz-border-radius: 5px 0 0 0;
+        }
+
+        /*Time to add downward connectors from parents*/
+        .tree ul ul::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-left: 3px solid green;
+            width: 0;
+            height: 20px;
+        }
+
+        .tree li a {
+            border: 2px solid;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #666;
+            /* font-family: arial, verdana, tahoma; */
+            font-size: 10px;
+            display: inline-block;
+
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+
+            transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+        }
+
+        /*Time for some hover effects*/
+        /*We will apply the hover effect the the lineage of the element also*/
+        .tree li a:hover,
+        .tree li a:hover+ul li a {
+            background: #c8e4f8;
+            color: #000;
+            border: 1px solid #94a0b4;
+        }
+
+        /*Connector styles on hover*/
+        .tree li a:hover+ul li::after,
+        .tree li a:hover+ul li::before,
+        .tree li a:hover+ul::before,
+        .tree li a:hover+ul ul::before {
+            border-color: #94a0b4;
+        }
+
+        .react-autosuggest__container {
+            position: relative;
+        }
+
+        .react-autosuggest__input {
+            text-transform: capitalize;
+            width: 300px;
+            padding: 10px 20px;
+            font-family: Helvetica, sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            border: 1px solid #56cc9d;
+            border-radius: 10px;
+        }
+
+        .react-autosuggest__input--focused {
+            outline: none;
+        }
+
+        .react-autosuggest__input--open {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .react-autosuggest__suggestions-container {
+            display: none;
+        }
+
+        .react-autosuggest__suggestions-container--open {
+            display: block;
+            position: relative;
+            top: 5px;
+            width: 320px;
+            border: 1px solid #aaa;
+            background-color: #fff;
+            font-family: Helvetica, sans-serif;
+            font-weight: 300;
+            font-size: 14px;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 2;
+        }
+
+        .react-autosuggest__suggestions-list {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .react-autosuggest__suggestion {
+            cursor: pointer;
+            padding: 10px 20px;
+            border-bottom: 2px solid brown;
+            text-transform: capitalize;
+        }
+
+        .react-autosuggest__suggestion--highlighted {
+            background-color: #ddd;
+        }
+
+        .react-autosuggest__suggestion--highlighted {
+            background-color: #ddd;
+        }
+
+        .react-autosuggest__suggestion-match {
+            color: red;
+            font-weight: bold;
+        }
+
+        .myCont {
+            min-height: 100vh;
+        }
+
+        .newSelect {
+            color: black;
+            width: 300px;
+            height: 40px;
+            margin-left: 20px;
+            display: inline-block;
+        }
+
+        .btn-sm {
+            height: 40px;
+        }
+
+        #family {
+            /* position: fixed !important; */
+            z-index: 20;
+            left: 0px;
+            width: max-content;
+        }
+
+        .treeStart {
+            z-index: 100;
+            margin-top: 50px;
+            /* transform: scale(0.8); */
+        }
+
+        .gender {
+            width: 150px;
+        }
+
+        .text-info {
+            cursor: pointer;
+        }
+
+        .btn {
+            font-size: 12px !important;
+        }
+    </style>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Nyakinyori Family</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/minty/bootstrap.min.css" rel="stylesheet" />
+    <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
+    <link rel="manifest" href="manifest.json" />
+
+</head>
+
+<body class="familyTree">
+    <h1 class="h1 display text-center text-primary text-uppercase">
+        Nyakinyori Family
+    </h1>
+    <div id="family" class="m-2"></div>
+
+
+    {% load mptt_tags %}
+    <div class="tree container-fluid">
+
+        <div class="treeStart" id="treeStart">
+            <ul>
+                {% recursetree genres %}
+                <li>
+                    <a href="#"
+                        class="text-capitalize {% if node.level == 0 %} beige {% elif node.level == 1 %} yellow {% elif node.level == 2 %} violet {% elif node.level == 3 %} purple {% elif node.level == 4 %} indigo {% elif node.level == 5 %} grey {% endif %}"><b>{{ node.name }}
+                        </b> {%if node.partner %}
+                        <span class="text-danger">|</span> {{ node.partner }} {% endif %}</a>
+
+                    {% if not node.is_leaf_node %}
+                    <ul class="children">
+                        {{ children }}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endrecursetree %}
+            </ul>
+        </div>
+    </div>
+    <script src="{% static 'js/family.js' %} "></script>
+</body>
+
+</html>
