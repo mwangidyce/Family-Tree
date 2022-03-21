@@ -5,21 +5,28 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 class Person(MPTTModel):
     name = models.CharField(max_length=50)
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    parent = TreeForeignKey('self',
+                            on_delete=models.CASCADE,
+                            null=True,
+                            blank=True,
+                            related_name='children')
     gender = models.CharField(max_length=6, blank=False, null=False)
     partner = models.CharField(max_length=50, blank=True, null=True)
-
-    class MPTTMeta:
-        order_insertion_by = ['id']
 
     def as_dict(self):
         parent = self.get_ancestors(ascending=True).first()
         return {
-            "id": self.id,
-            "name": self.name,
-            "gender": self.gender,
-            "partner": self.partner,
-            "parent": f"{parent.name} {'and ' + parent.partner if parent.partner else ''}" if parent else ''
+            "id":
+            self.id,
+            "name":
+            self.name,
+            "gender":
+            self.gender,
+            "partner":
+            self.partner,
+            "parent":
+            f"{parent.name} {'and ' + parent.partner if parent.partner else ''}"
+            if parent else ''
         }
 
     def __unicode__(self):
@@ -35,13 +42,29 @@ class Person(MPTTModel):
     def change_form(self):
         parent = self.get_ancestors(ascending=True).first()
         return {
-            "id": self.id,
-            "name": self.name,
-            "gender": self.gender,
-            "partner": self.partner,
-            "parent": {"name": f"{parent.name} {'and ' + parent.partner if parent.partner else ''}" if parent else '', "id": parent.id if parent else ""},
-            "children": [{"id": obj.id, "name": obj.name} for obj in self.get_children()]
+            "id":
+            self.id,
+            "name":
+            self.name,
+            "gender":
+            self.gender,
+            "partner":
+            self.partner,
+            "parent": {
+                "name":
+                f"{parent.name} {'and ' + parent.partner if parent.partner else ''}"
+                if parent else '',
+                "id":
+                parent.id if parent else ""
+            },
+            "children": [{
+                "id": obj.id,
+                "name": obj.name
+            } for obj in self.get_children()]
         }
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('name', )
+
+    class MPTTMeta:
+        order_insertion_by = ['id']
