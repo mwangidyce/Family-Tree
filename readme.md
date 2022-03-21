@@ -6,9 +6,9 @@ A working demo can be seen here [Working demo](http://nyakinyori.com/). This han
 
 This is a hobby project, with no financial incentive.
 
-<img src="./Family-Tree/static/Screenshot%20(2).png"  height="300">
+<img src="./static/Screenshot%20(2).png"  height="300">
 
-<img src="./Family-Tree/static/Screenshot%20(3).png"  height="300">
+<img src="./static/Screenshot%20(3).png"  height="300">
 
 ## Getting started
 
