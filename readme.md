@@ -2,7 +2,7 @@
 
 This project entails building a family tree from scratch using django and html/css on the frontend.
 
-A working demo can be seen here [Working demo](http://nyakinyori.com/). This handles more than 800 family records over many generations. Also has an admin area for memebr management.
+A working demo can be seen here [Working demo](http://nyakinyori.com/). This handles more than 800 family records over many generations. Also has an admin area for member management.
 
 This is a hobby project, with no financial incentive.
 
